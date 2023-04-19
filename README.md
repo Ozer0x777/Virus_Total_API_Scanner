@@ -43,7 +43,7 @@ To use this script, you will need to have a VirusTotal API key. If you don't hav
 
 ## Roadmap ##
 - [x] Adding TQDM 
-- [x] Auto correct empty lines another exception
+- [x] Auto correct empty lines
 - [ ] Windows executable version
 
 
