@@ -23,7 +23,7 @@ Installation
     
     
 
-##Usage
+## Usage
 
     python virustotal_api_scanner.py --api_key <API_KEY> [--file <FILE_PATH> ...] [--url <URL> ...] [--ip <IP_OR_HASH> ...] [--input <INPUT_FILE>] [--output <OUTPUT_FILE>]
 
