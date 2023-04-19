@@ -2,6 +2,7 @@ import requests
 import time
 import csv
 import argparse
+from tqdm import tqdm
 
 API_URL = 'https://www.virustotal.com/api/v3'
 SCAN_URL = f'{API_URL}/files'
@@ -9,6 +10,12 @@ SCAN_URLS_URL = f'{API_URL}/urls'
 IP_OR_HASH_REPORT_URL = f'{API_URL}/ip_addresses/%s'
 URL_REPORT_URL = f'{API_URL}/urls/%s'
 SCAN_WAIT_TIME = 15
+
+def remove_empty_lines(file_path):
+    with open(file_path, 'r') as f:
+        lines = f.readlines()
+    with open(file_path, 'w') as f:
+        f.writelines(line for line in lines if line.strip())
 
 def scan_file(file_path):
     with open(file_path, 'rb') as f:
@@ -117,28 +124,27 @@ if __name__ == '__main__':
                     samples.append({'type': 'hash', 'value': line})
 
     results = []
-    for sample in samples:
-        scan_id = None
-        if sample['type'] == 'file':
-            scan_id = scan_file(sample['value'])
-        elif sample['type'] == 'url':
-            scan_id = scan_url(sample['value'])
-        elif sample['type'] == 'ip' or sample['type'] == 'hash':
-            result = scan_ip_or_hash(sample['value'])
-            if result:
-                results.append({'type': sample['type'], 'value': sample['value'], 'results': result})
-            continue
-        
-        if scan_id:
-            time.sleep(SCAN_WAIT_TIME)
-            scan_result = get_file_scan_result(scan_id) if sample['type'] == 'file' else get_url_scan_result(scan_id)
-            if scan_result:
-                results.append({'type': sample['type'], 'value': sample['value'], 'results': scan_result})
+for sample in tqdm(samples, desc="Scanning samples"):
+    scan_id = None
+    if sample['type'] == 'file':
+        scan_id = scan_file(sample['value'])
+    elif sample['type'] == 'url':
+        scan_id = scan_url(sample['value'])
+    elif sample['type'] == 'ip' or sample['type'] == 'hash':
+        result = scan_ip_or_hash(sample['value'])
+        if result:
+            results.append({'type': sample['type'], 'value': sample['value'], 'results': result})
+        continue
+    
+    if scan_id:
+        time.sleep(SCAN_WAIT_TIME)
+        scan_result = get_file_scan_result(scan_id) if sample['type'] == 'file' else get_url_scan_result(scan_id)
+        if scan_result:
+            results.append({'type': sample['type'], 'value': sample['value'], 'results': scan_result})
 
-    with open(args.output, mode='w') as csv_file:
-        fieldnames = ['type', 'value', 'result']
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writeheader()
-        for result in results:
-            writer.writerow({'type': result['type'], 'value': result['value'], 'result': result['results']})
-    print(f'Scan results saved to {args.output}')
+with open(args.output, mode='w') as csv_file:
+    fieldnames = ['type', 'value', 'result']
+    writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+    writer.writeheader()
+    for result in results:
+        writer.writerow({'type': result['type'], 'value': result['value'], 'result': result['results']})
