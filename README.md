@@ -42,8 +42,8 @@ To use this script, you will need to have a VirusTotal API key. If you don't hav
     python virustotal_api_scanner.py --api_key abcdef123456 --file sample.exe --url https://www.google.fr
 
 ## Roadmap ##
-- [ ] Adding TQDM 
-- [ ] Auto correct empty lines another exception
+- [x] Adding TQDM 
+- [x] Auto correct empty lines another exception
 - [ ] Windows executable version
 
 
