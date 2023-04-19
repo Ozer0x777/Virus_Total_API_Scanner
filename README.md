@@ -47,3 +47,7 @@ Installation
 - [ ] Adding TQDM 
 - [ ] Auto correct empty lines another exception
 - [ ] Windows executable version
+
+
+
+ [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)
