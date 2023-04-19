@@ -12,16 +12,15 @@ Prerequisites
 To use this script, you will need to have a VirusTotal API key. If you don't have one, you can sign up for a free account.
 Installation
 
+## Install
+
   Clone the repository:
 
     git clone https://github.com/Ozer0x777/Virus_Total_API_Scanner.git
 
   Install the required libraries:
 
-    pip install -r requirements.txt
-    
-    
-    
+    pip install -r requirements.txt   
 
 ## Usage
 
