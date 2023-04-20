@@ -47,6 +47,10 @@ To use this script, you will need to have a VirusTotal API key. If you don't hav
 - [x] Auto correct empty lines
 - [x] Windows executable version
 
+## Contributing
 
+Contributions are welcome! If you find a bug or have a feature request, please open an issue on the GitHub repository.
 
- [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)
+## License
+
+[![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)
