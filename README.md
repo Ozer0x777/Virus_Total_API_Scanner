@@ -1,4 +1,4 @@
-# VirusTotal API Sample Scanner
+# VirusTotal API Scanner
 
 This is a Python script for scanning files, URLs, and IP addresses using the VirusTotal API. It accepts multiple inputs and generates a CSV report containing the results.
 
@@ -45,7 +45,7 @@ To use this script, you will need to have a VirusTotal API key. If you don't hav
 ## Roadmap ##
 - [x] Adding TQDM 
 - [x] Auto correct empty lines
-- [ ] Windows executable version
+- [x] Windows executable version
 
 
 
