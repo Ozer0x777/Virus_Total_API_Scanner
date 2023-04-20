@@ -8,8 +8,6 @@ This is a Python script for scanning files, URLs, and IP addresses using the Vir
     requests library
     tqdm
     
-### API Key
-
 To use this script, you will need to have a VirusTotal API key. If you don't have one, you can sign up for a free account.
 
 ## Installation
