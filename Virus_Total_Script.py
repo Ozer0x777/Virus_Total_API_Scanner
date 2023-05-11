@@ -3,6 +3,7 @@ import time
 import csv
 import argparse
 from tqdm import tqdm
+from base64 import b64decode
 
 API_URL = 'https://www.virustotal.com/api/v3'
 SCAN_URL = f'{API_URL}/files'
@@ -40,8 +41,10 @@ def get_file_scan_result(scan_id):
     headers = {
         'x-apikey': args.api_key
     }
+
+    hash = b64decode(scan_id).split(b':')[0].decode('utf-8')
     
-    response = requests.get(f'{SCAN_URL}/{scan_id}', headers=headers)
+    response = requests.get(f'{SCAN_URL}/{hash}', headers=headers)
     if response.status_code == 200:
         return response.json()['data']['attributes']['last_analysis_results']
     else:
